@@ -8,7 +8,7 @@
 
 Name:          game-data-packager
 Version:       45
-Release:       1%{?gver}
+Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
 Url:           https://wiki.debian.org/Games/GameDataPackager
