@@ -8,7 +8,7 @@
 
 Name:          game-data-packager
 Version:       45
-Release:       1%{?gver}%{?dist}
+Release:       2%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
 Url:           https://wiki.debian.org/Games/GameDataPackager
@@ -20,7 +20,7 @@ Source:        http://http.debian.net/debian/pool/contrib/g/game-data-packager/g
 %endif
 BuildArch:     noarch
 BuildRequires: ImageMagick
-BuildRequires: inkscape
+#BuildRequires: inkscape
 BuildRequires: python3
 BuildRequires: python3-PyYAML
 BuildRequires: python3-pyflakes
@@ -62,6 +62,10 @@ show it's description.
 
 %prep
 %autosetup
+rm data/*.svg -v
+sed -i '/out\/memento-mori.png/d' Makefile
+sed -i 's|out/memento-mori-2.svg||g' Makefile
+sed -i '/install -m0644 out\/\*.svgz/d' Makefile
 
 %build
 make %{?_smp_mflags}
@@ -96,6 +100,9 @@ rm -rvf $RPM_BUILD_ROOT/etc/apparmor.d
 %license COPYING
 
 %changelog
+* Sat Jul 23 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 45-2
+- Inkscape is currently uninstallable, temporary strip out .svg from build
+
 * Fri Jul 22 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 45-1
 - Finally upload to RPMFusion, skip v44
 
