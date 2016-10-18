@@ -24,6 +24,8 @@ BuildRequires: inkscape
 BuildRequires: python3
 BuildRequires: python3-PyYAML
 BuildRequires: python3-pyflakes
+BuildRequires: xcftools
+BuildRequires: xmlstarlet
 BuildRequires: zip
 Requires: python3-PyYAML
 # download
