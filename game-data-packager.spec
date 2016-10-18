@@ -25,8 +25,6 @@ BuildRequires: python3
 BuildRequires: python3-PyYAML
 BuildRequires: python3-pyflakes
 BuildRequires: zip
-# just for one test
-BuildRequires: lha
 Requires: python3-PyYAML
 # download
 Recommends: lgogdownloader
@@ -67,7 +65,8 @@ show it's description.
 %autosetup
 # id-shr-extract is not packaged
 sed -i '/wolf3d/d' tests/integration.py
-
+# Mock: "Error: No Package found for lha"
+sed -i '/spear/d' tests/integration.py
 
 %build
 make %{?_smp_mflags}
