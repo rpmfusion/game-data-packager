@@ -20,7 +20,7 @@ Source:        http://http.debian.net/debian/pool/contrib/g/game-data-packager/g
 %endif
 BuildArch:     noarch
 BuildRequires: ImageMagick
-#BuildRequires: inkscape
+BuildRequires: inkscape
 BuildRequires: python3
 BuildRequires: python3-PyYAML
 BuildRequires: python3-pyflakes
