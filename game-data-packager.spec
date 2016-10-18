@@ -7,8 +7,8 @@
 %endif
 
 Name:          game-data-packager
-Version:       45
-Release:       2%{?gver}%{?dist}
+Version:       46
+Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
 Url:           https://wiki.debian.org/Games/GameDataPackager
@@ -25,6 +25,8 @@ BuildRequires: python3
 BuildRequires: python3-PyYAML
 BuildRequires: python3-pyflakes
 BuildRequires: zip
+# just for one test
+BuildRequires: lha
 Requires: python3-PyYAML
 # download
 Recommends: lgogdownloader
@@ -56,16 +58,16 @@ data which cannot be distributed (such as commercial game data).
 Summary: "Master Levels for Doom II" launcher
 Requires: python3-gobject-base
 Requires: gobject-introspection
+Provides: game-data-packager-runtime
 %description -n doom2-masterlevels
 This GUI let you select a WAD to play &
 show it's description.
 
 %prep
 %autosetup
-rm data/*.svg -v
-sed -i '/out\/memento-mori.png/d' Makefile
-sed -i 's|out/memento-mori-2.svg||g' Makefile
-sed -i '/install -m0644 out\/\*.svgz/d' Makefile
+# id-shr-extract is not packaged
+sed -i '/wolf3d/d' tests/integration.py
+
 
 %build
 make %{?_smp_mflags}
@@ -74,12 +76,28 @@ make %{?_smp_mflags}
 make check
 
 %install
-make DESTDIR=$RPM_BUILD_ROOT bindir=/usr/bin datadir=/usr/share install
-find $RPM_BUILD_ROOT/usr/share/game-data-packager/game_data_packager -name '*.py' -exec chmod 755 {} \;
+make DESTDIR=$RPM_BUILD_ROOT install
+find $RPM_BUILD_ROOT/usr/share/games/game-data-packager/game_data_packager -name '*.py' -exec chmod 755 {} \;
 #E: python-bytecode-inconsistent-mtime
-python3 -m compileall $RPM_BUILD_ROOT/usr/share/game-data-packager/game_data_packager/version.py
+python3 -m compileall $RPM_BUILD_ROOT/usr/share/games/game-data-packager/game_data_packager/version.py
 find $RPM_BUILD_ROOT/etc/game-data-packager -empty -exec sh -c "echo '# we need more mirrors' > {}" \;
 rm -rvf $RPM_BUILD_ROOT/etc/apparmor.d
+
+# why does these end there ???
+# also configure.mk got wrong contents
+mv $RPM_BUILD_ROOT/usr/games $RPM_BUILD_ROOT/usr/bin
+
+# throw away src:quake stuff for now
+rm -v $RPM_BUILD_ROOT/usr/bin/etqw*
+rm -v $RPM_BUILD_ROOT/usr/bin/quake*
+rm -vr $RPM_BUILD_ROOT/usr/lib
+rm -v $RPM_BUILD_ROOT/usr/share/applications/etqw.desktop
+rm -v $RPM_BUILD_ROOT/usr/share/applications/quake*.desktop
+rm -rv $RPM_BUILD_ROOT/usr/share/games/game-data-packager-runtime/
+rm -rv $RPM_BUILD_ROOT/usr/share/games/quake*
+rm -rv $RPM_BUILD_ROOT/usr/share/icons
+rm -v $RPM_BUILD_ROOT/usr/share/man/man6/etqw*.6
+rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 
 %files
 %doc doc/adding_a_game.mdwn
@@ -89,7 +107,7 @@ rm -rvf $RPM_BUILD_ROOT/etc/apparmor.d
 %config(noreplace) %attr(644, root, root) /etc/game-data-packager/*
 /usr/bin/game-data-packager
 /usr/share/bash-completion/completions/game-data-packager
-/usr/share/game-data-packager
+/usr/share/games/game-data-packager
 %license COPYING
 
 %files -n doom2-masterlevels
@@ -100,6 +118,9 @@ rm -rvf $RPM_BUILD_ROOT/etc/apparmor.d
 %license COPYING
 
 %changelog
+* Tue Oct 18 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 46-1
+- new upstream release
+
 * Sat Jul 23 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 45-2
 - Inkscape is currently uninstallable, temporary strip out .svg from build
 
