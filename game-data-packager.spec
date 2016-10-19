@@ -120,7 +120,7 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 
 %changelog
 * Tue Oct 18 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 46-1
-- new upstream release
+- new experimental upstream release, don't push to F25/F24 etc...
 
 * Sat Jul 23 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 45-2
 - Inkscape is currently uninstallable, temporary strip out .svg from build
