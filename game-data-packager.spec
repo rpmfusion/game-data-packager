@@ -79,24 +79,21 @@ make check
 
 %install
 make DESTDIR=$RPM_BUILD_ROOT install
-find $RPM_BUILD_ROOT/usr/share/games/game-data-packager/game_data_packager -name '*.py' -exec chmod 755 {} \;
+find $RPM_BUILD_ROOT/usr/share/game-data-packager/game_data_packager -name '*.py' -exec chmod 755 {} \;
 #E: python-bytecode-inconsistent-mtime
-python3 -m compileall $RPM_BUILD_ROOT/usr/share/games/game-data-packager/game_data_packager/version.py
+python3 -m compileall $RPM_BUILD_ROOT/usr/share/game-data-packager/game_data_packager/version.py
 find $RPM_BUILD_ROOT/etc/game-data-packager -empty -exec sh -c "echo '# we need more mirrors' > {}" \;
-rm -rvf $RPM_BUILD_ROOT/etc/apparmor.d
-
-# why does these end there ???
-# also configure.mk got wrong contents
-mv $RPM_BUILD_ROOT/usr/games $RPM_BUILD_ROOT/usr/bin
 
 # throw away src:quake stuff for now
+rm -rvf $RPM_BUILD_ROOT/etc/apparmor.d
 rm -v $RPM_BUILD_ROOT/usr/bin/etqw*
 rm -v $RPM_BUILD_ROOT/usr/bin/quake*
-rm -vr $RPM_BUILD_ROOT/usr/lib
+rm -vrf $RPM_BUILD_ROOT/usr/lib32
+rm -vrf $RPM_BUILD_ROOT/usr/lib64
 rm -v $RPM_BUILD_ROOT/usr/share/applications/etqw.desktop
 rm -v $RPM_BUILD_ROOT/usr/share/applications/quake*.desktop
-rm -rv $RPM_BUILD_ROOT/usr/share/games/game-data-packager-runtime/
-rm -rv $RPM_BUILD_ROOT/usr/share/games/quake*
+rm -rv $RPM_BUILD_ROOT/usr/share/game-data-packager-runtime/
+rm -rv $RPM_BUILD_ROOT/usr/share/quake*
 rm -rv $RPM_BUILD_ROOT/usr/share/icons
 rm -v $RPM_BUILD_ROOT/usr/share/man/man6/etqw*.6
 rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
@@ -109,7 +106,7 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %config(noreplace) %attr(644, root, root) /etc/game-data-packager/*
 /usr/bin/game-data-packager
 /usr/share/bash-completion/completions/game-data-packager
-/usr/share/games/game-data-packager
+/usr/share/game-data-packager
 %license COPYING
 
 %files -n doom2-masterlevels
