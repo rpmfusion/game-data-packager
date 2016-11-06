@@ -120,6 +120,9 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %license COPYING
 
 %changelog
+* Sun Nov 06 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 47-1
+- new upstream release
+
 * Tue Oct 18 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 46-1
 - new experimental upstream release, don't push to F25/F24 etc...
 
