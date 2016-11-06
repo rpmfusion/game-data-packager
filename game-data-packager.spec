@@ -58,7 +58,7 @@ data which cannot be distributed (such as commercial game data).
 Summary: "Master Levels for Doom II" launcher
 Requires: python3-gobject-base
 Requires: gobject-introspection
-Provides: game-data-packager-runtime
+Provides: game-data-packager-runtime = %{version}
 %description -n doom2-masterlevels
 This GUI let you select a WAD to play &
 show it's description.
