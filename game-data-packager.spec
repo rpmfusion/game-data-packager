@@ -7,7 +7,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       46
+Version:       47
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -71,6 +71,7 @@ sed -i '/wolf3d/d' tests/integration.py
 sed -i '/spear/d' tests/integration.py
 
 %build
+%configure
 make %{?_smp_mflags}
 
 %check
