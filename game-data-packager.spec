@@ -88,8 +88,8 @@ find $RPM_BUILD_ROOT/etc/game-data-packager -empty -exec sh -c "echo '# we need 
 rm -rvf $RPM_BUILD_ROOT/etc/apparmor.d
 rm -v $RPM_BUILD_ROOT/usr/bin/etqw*
 rm -v $RPM_BUILD_ROOT/usr/bin/quake*
-rm -vrf $RPM_BUILD_ROOT/usr/lib32
-rm -vrf $RPM_BUILD_ROOT/usr/lib64
+# 'lib64' in local build, 'lib' on buildd
+rm -vrf $RPM_BUILD_ROOT/usr/lib*
 rm -v $RPM_BUILD_ROOT/usr/share/applications/etqw.desktop
 rm -v $RPM_BUILD_ROOT/usr/share/applications/quake*.desktop
 rm -rv $RPM_BUILD_ROOT/usr/share/game-data-packager-runtime/
