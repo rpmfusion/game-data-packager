@@ -1,3 +1,13 @@
+# How to refresh
+#
+# 1) bump "Version:"
+# 2) add changelog entry
+# 3) 'spectool -g game-data-packager.spec'
+# 4) rpmbuild -ba game-data-packager.spec
+# 5) rfpkg commit
+# 6) rfpkg push
+# 7) rfpkg build
+
 #define gitdate 20160112
 # git log --oneline -1
 %define gitversion 50f64b6
@@ -7,7 +17,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       47
+Version:       48
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -117,6 +127,9 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %license COPYING
 
 %changelog
+* Sun Dec 11 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 48-1
+- new upstream release
+
 * Sun Nov 06 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 47-1
 - new upstream release
 
