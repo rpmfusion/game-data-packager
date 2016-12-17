@@ -1,12 +1,13 @@
-# How to refresh
+# How to refresh:
 #
-# 1) bump "Version:"
-# 2) add changelog entry
-# 3) 'spectool -g game-data-packager.spec'
-# 4) rpmbuild -ba game-data-packager.spec
-# 5) rfpkg commit
-# 6) rfpkg push
-# 7) rfpkg build
+# - bump "Version:"
+# - add changelog entry
+# spectool -g game-data-packager.spec
+# rfpkg new-sources game-data-packager_${version}.tar.xz
+# rpmbuild -ba game-data-packager.spec
+# rfpkg commit
+# rfpkg push
+# rfpkg build
 
 #define gitdate 20160112
 # git log --oneline -1
