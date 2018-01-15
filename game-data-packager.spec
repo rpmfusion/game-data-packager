@@ -18,7 +18,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       55
+Version:       56
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -86,7 +86,7 @@ sed -i '/spear/d' tests/integration.py
 make %{?_smp_mflags}
 
 %check
-make check
+DEB_BUILD_TIME_TESTS=1 make check
 
 %install
 make DESTDIR=$RPM_BUILD_ROOT install
@@ -128,6 +128,10 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %license COPYING
 
 %changelog
+* Mon Jan 15 2018 Alexandre Detiste <alexandre.detiste@gmail.com> - 56-1
+- New upstream release
+- skip memory-hungry tests
+
 * Wed Dec 20 2017 Alexandre Detiste <alexandre.detiste@gmail.com> - 55-1
 - New upstream release
 
