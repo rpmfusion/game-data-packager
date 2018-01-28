@@ -18,7 +18,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       57
+Version:       58
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -128,6 +128,9 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %license COPYING
 
 %changelog
+* Sun Jan 28 2018 Alexandre Detiste <alexandre.detiste@gmail.com> - 58-1
+- New upstream release
+
 * Wed Jan 17 2018 Alexandre Detiste <alexandre.detiste@gmail.com> - 57-1
 - New upstream release
 
