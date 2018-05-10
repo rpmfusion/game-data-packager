@@ -18,8 +18,8 @@
 %endif
 
 Name:          game-data-packager
-Version:       58
-Release:       2%{?gver}%{?dist}
+Version:       59
+Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
 Url:           https://wiki.debian.org/Games/GameDataPackager
@@ -128,6 +128,9 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %license COPYING
 
 %changelog
+* Thu May 10 2018 Alexandre Detiste <alexandre.detiste@gmail.com> - 59-1
+- New upstream release
+
 * Thu Mar 01 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 58-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
