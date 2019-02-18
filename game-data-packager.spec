@@ -131,7 +131,7 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 * Mon Feb 18 2019 Alexandre Detiste <alexandre.detiste@gmail.com> - 63-1
 - New upstream release
 
-* Mon Jan 31 2019 Alexandre Detiste <alexandre.detiste@gmail.com> - 62-1
+* Thu Jan 31 2019 Alexandre Detiste <alexandre.detiste@gmail.com> - 62-1
 - New upstream release
 
 * Sun Nov 11 2018 Alexandre Detiste <alexandre.detiste@gmail.com> - 60-1
