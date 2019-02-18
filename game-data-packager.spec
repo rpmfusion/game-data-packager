@@ -35,7 +35,7 @@ BuildRequires: inkscape
 BuildRequires: python3
 BuildRequires: python3-PyYAML
 BuildRequires: python3-pyflakes
-BuildRequires: xcftools
+#BuildRequires: xcftools
 BuildRequires: xmlstarlet
 BuildRequires: zip
 Requires: python3-PyYAML
@@ -130,6 +130,7 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %changelog
 * Mon Feb 18 2019 Alexandre Detiste <alexandre.detiste@gmail.com> - 63-1
 - New upstream release
+- Build without xcftools
 
 * Thu Jan 31 2019 Alexandre Detiste <alexandre.detiste@gmail.com> - 62-1
 - New upstream release
