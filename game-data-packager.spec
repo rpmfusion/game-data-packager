@@ -85,8 +85,8 @@ sed -i '/spear/d' tests/integration.py
 %configure
 make %{?_smp_mflags}
 
-#%check
-#DEB_BUILD_TIME_TESTS=1 make check
+%check
+DEB_BUILD_TIME_TESTS=1 make check
 
 %install
 make DESTDIR=$RPM_BUILD_ROOT install
