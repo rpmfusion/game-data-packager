@@ -19,7 +19,7 @@
 
 Name:          game-data-packager
 Version:       65
-Release:       1%{?gver}%{?dist}
+Release:       2%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
 Url:           https://wiki.debian.org/Games/GameDataPackager
@@ -128,6 +128,9 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %license COPYING
 
 %changelog
+* Mon Aug 17 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 65-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Tue May 19 2020 Alexandre Detiste <alexandre.detiste@gmail.com> - 65-1
 - New upstream release
 - Builds with Inkscape 1.0
