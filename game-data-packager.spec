@@ -19,17 +19,20 @@
 
 Name:          game-data-packager
 Version:       65
-Release:       2%{?gver}%{?dist}
+Release:       3%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
-Url:           https://wiki.debian.org/Games/GameDataPackager
+URL:           https://wiki.debian.org/Games/GameDataPackager
 %if 0%{?gitdate}
 # git archive --prefix=game-data-packager-44/ --format tar.gz master > ../rpmbuild/SOURCES/game-data-packager-`date +%Y%m%d`.tar.gz
 Source:        game-data-packager-%{gitdate}.tar.gz
 %else
 Source:        http://http.debian.net/debian/pool/contrib/g/game-data-packager/game-data-packager_%{version}.tar.xz
 %endif
+
 BuildArch:     noarch
+
+BuildRequires: desktop-file-utils
 BuildRequires: ImageMagick
 BuildRequires: inkscape
 BuildRequires: python3
@@ -38,6 +41,7 @@ BuildRequires: python3-pyflakes
 #BuildRequires: xcftools
 BuildRequires: xmlstarlet
 BuildRequires: zip
+
 Requires: python3-PyYAML
 # download
 Recommends: lgogdownloader
@@ -70,6 +74,7 @@ Summary: "Master Levels for Doom II" launcher
 Requires: python3-gobject-base
 Requires: gobject-introspection
 Provides: game-data-packager-runtime = %{version}
+
 %description -n doom2-masterlevels
 This GUI let you select a WAD to play &
 show it's description.
@@ -83,51 +88,58 @@ sed -i '/spear/d' tests/integration.py
 
 %build
 %configure
-make %{?_smp_mflags}
+%make_build
 
 %check
 DEB_BUILD_TIME_TESTS=1 make check
 
 %install
-make DESTDIR=$RPM_BUILD_ROOT install
-find $RPM_BUILD_ROOT/usr/share/game-data-packager/game_data_packager -name '*.py' -exec chmod 755 {} \;
+%make_install
+find %{buildroot}%{_datadir}/game-data-packager/game_data_packager -name '*.py' -exec chmod 755 {} \;
 #E: python-bytecode-inconsistent-mtime
-python3 -m compileall $RPM_BUILD_ROOT/usr/share/game-data-packager/game_data_packager/version.py
-find $RPM_BUILD_ROOT/etc/game-data-packager -empty -exec sh -c "echo '# we need more mirrors' > {}" \;
+python3 -m compileall %{buildroot}%{_datadir}/game-data-packager/game_data_packager/version.py
+find %{buildroot}%{_sysconfdir}/game-data-packager -empty -exec sh -c "echo '# we need more mirrors' > {}" \;
 
 # throw away src:quake stuff for now
-rm -rvf $RPM_BUILD_ROOT/etc/apparmor.d
-rm -v $RPM_BUILD_ROOT/usr/bin/etqw*
-rm -v $RPM_BUILD_ROOT/usr/bin/quake*
+rm -rvf %{buildroot}%{_sysconfdir}/apparmor.d
+rm -v %{buildroot}%{_bindir}/etqw*
+rm -v %{buildroot}%{_bindir}/quake*
 # 'lib64' in local build, 'lib' on buildd
-rm -vrf $RPM_BUILD_ROOT/usr/lib*
-rm -v $RPM_BUILD_ROOT/usr/share/applications/etqw.desktop
-rm -v $RPM_BUILD_ROOT/usr/share/applications/quake*.desktop
-rm -rv $RPM_BUILD_ROOT/usr/share/game-data-packager-runtime/
-rm -rv $RPM_BUILD_ROOT/usr/share/quake*
-rm -rv $RPM_BUILD_ROOT/usr/share/icons
-rm -v $RPM_BUILD_ROOT/usr/share/man/man6/etqw*.6
-rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
+rm -vrf %{buildroot}/usr/lib*
+rm -v %{buildroot}%{_datadir}/applications/etqw.desktop
+rm -v %{buildroot}%{_datadir}/applications/quake*.desktop
+rm -rv %{buildroot}%{_datadir}/game-data-packager-runtime/
+rm -rv %{buildroot}%{_datadir}/quake*
+rm -rv %{buildroot}%{_datadir}/icons
+rm -v %{buildroot}%{_mandir}/man6/etqw*.6
+rm -v %{buildroot}%{_mandir}/man6/quake*.6
+
+desktop-file-validate %{buildroot}%{_datadir}/applications/doom2-masterlevels.desktop
 
 %files
 %doc doc/adding_a_game.mdwn
+%license COPYING
 %{_mandir}/man6/game-data-packager.*
 %{_mandir}/fr/man6/game-data-packager.*
-%config(noreplace) %attr(644, root, root) /etc/game-data-packager.conf
-%config(noreplace) %attr(644, root, root) /etc/game-data-packager/*
-/usr/bin/game-data-packager
-/usr/share/bash-completion/completions/game-data-packager
-/usr/share/game-data-packager
-%license COPYING
+%config(noreplace) %{_sysconfdir}/game-data-packager.conf
+%config(noreplace) %{_sysconfdir}/game-data-packager/*
+%{_bindir}/game-data-packager
+%{_datadir}/bash-completion/completions/game-data-packager
+%{_datadir}/game-data-packager
 
 %files -n doom2-masterlevels
-%{_mandir}/man6/doom2-masterlevels.*
-/usr/bin/doom2-masterlevels
-/usr/share/applications/doom2-masterlevels.desktop
-/usr/share/pixmaps/doom2-masterlevels.png
 %license COPYING
+%{_mandir}/man6/doom2-masterlevels.*
+%{_bindir}/doom2-masterlevels
+%{_datadir}/applications/doom2-masterlevels.desktop
+%{_datadir}/pixmaps/doom2-masterlevels.png
 
 %changelog
+* Mon Aug 24 2020 Leigh Scott <leigh123linux@gmail.com> - 65-3
+- Use the proper macros
+- Validate desktop file
+- Clean up spec file
+
 * Mon Aug 17 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 65-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
@@ -213,8 +225,8 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 * Sun Jan 24 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 44-1
 - First cross-distribution release
 - Add Cacodemon icon to doom2-masterlevels subpackage
-- The (optional) licenses of generated .rpm goes now correctly to /usr/share/licenses
-  instead of /usr/share/doc
+- The (optional) licenses of generated .rpm goes now correctly to %{_datadir}/licenses
+  instead of %{_datadir}/doc
 - AppArmor support temporary disabled until figured out
 
 * Thu Dec 31 2015 Alexandre Detiste <alexandre.detiste@gmail.com> - 44-0.2.git2015123150f64b6
