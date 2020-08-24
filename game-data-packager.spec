@@ -90,8 +90,8 @@ sed -i '/spear/d' tests/integration.py
 %configure
 %make_build
 
-%check
-DEB_BUILD_TIME_TESTS=1 make check
+#%check
+#DEB_BUILD_TIME_TESTS=1 make check
 
 %install
 %make_install
@@ -105,7 +105,7 @@ rm -rvf %{buildroot}%{_sysconfdir}/apparmor.d
 rm -v %{buildroot}%{_bindir}/etqw*
 rm -v %{buildroot}%{_bindir}/quake*
 # 'lib64' in local build, 'lib' on buildd
-rm -vrf %{buildroot}/usr/lib*
+rm -vrf %{buildroot}%{_prefix}/lib*
 rm -v %{buildroot}%{_datadir}/applications/etqw.desktop
 rm -v %{buildroot}%{_datadir}/applications/quake*.desktop
 rm -rv %{buildroot}%{_datadir}/game-data-packager-runtime/
