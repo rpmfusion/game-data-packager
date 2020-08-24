@@ -121,11 +121,12 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/doom2-masterlevels.de
 %license COPYING
 %{_mandir}/man6/game-data-packager.*
 %{_mandir}/fr/man6/game-data-packager.*
+%dir %{_sysconfdir}/game-data-packager/
 %config(noreplace) %{_sysconfdir}/game-data-packager.conf
 %config(noreplace) %{_sysconfdir}/game-data-packager/*
 %{_bindir}/game-data-packager
 %{_datadir}/bash-completion/completions/game-data-packager
-%{_datadir}/game-data-packager
+%{_datadir}/game-data-packager/
 
 %files -n doom2-masterlevels
 %license COPYING
