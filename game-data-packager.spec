@@ -18,7 +18,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       65
+Version:       66
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -128,6 +128,9 @@ rm -v $RPM_BUILD_ROOT/usr/share/man/man6/quake*.6
 %license COPYING
 
 %changelog
+* Fri Dec 25 2020 Alexandre Detiste <alexandre.detiste@gmail.com> - 65-1
+- New upstream release
+
 * Tue May 19 2020 Alexandre Detiste <alexandre.detiste@gmail.com> - 65-1
 - New upstream release
 - Builds with Inkscape 1.0
