@@ -19,7 +19,7 @@
 
 Name:          game-data-packager
 Version:       68
-Release:       1%{?gver}%{?dist}
+Release:       2%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
 URL:           https://wiki.debian.org/Games/GameDataPackager
@@ -136,6 +136,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/doom2-masterlevels.de
 %{_datadir}/pixmaps/doom2-masterlevels.png
 
 %changelog
+* Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 68-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
 * Fri Oct 08 2021 Alexandre Detiste <alexandre.detiste@gmail.com> - 68-1
 - New upstream release
 
