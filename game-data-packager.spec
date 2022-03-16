@@ -144,6 +144,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/doom2-masterlevels.de
 - New upstream release
 - Switch to Meson build system
 
+* Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 68-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
 * Fri Oct 08 2021 Alexandre Detiste <alexandre.detiste@gmail.com> - 68-1
 - New upstream release
 
