@@ -9,6 +9,8 @@
 # rfpkg push
 # rfpkg build
 
+%global _vpath_srcdir %{name}-%{version}/
+
 #define gitdate 20160112
 # git log --oneline -1
 %define gitversion 50f64b6
@@ -18,7 +20,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       68
+Version:       69
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -32,6 +34,7 @@ Source:        http://http.debian.net/debian/pool/contrib/g/game-data-packager/g
 
 BuildArch:     noarch
 
+BuildRequires: meson
 BuildRequires: desktop-file-utils
 BuildRequires: ImageMagick
 BuildRequires: inkscape
@@ -80,21 +83,22 @@ This GUI let you select a WAD to play &
 show it's description.
 
 %prep
-%autosetup
+%autosetup -c
 # id-shr-extract is not packaged
-sed -i '/wolf3d/d' tests/integration.py
+#sed -i '/wolf3d/d' tests/integration.py
 # Mock: "Error: No Package found for lha"
-sed -i '/spear/d' tests/integration.py
+#sed -i '/spear/d' tests/integration.py
 
 %build
-%configure
-%make_build
+%meson
+%meson_build
 
-#%check
-#DEB_BUILD_TIME_TESTS=1 make check
+%check
+echo disabled
+#DEB_BUILD_TIME_TESTS=1 % meson_test
 
 %install
-%make_install
+%meson_install
 find %{buildroot}%{_datadir}/game-data-packager/game_data_packager -name '*.py' -exec chmod 755 {} \;
 #E: python-bytecode-inconsistent-mtime
 python3 -m compileall %{buildroot}%{_datadir}/game-data-packager/game_data_packager/version.py
@@ -117,8 +121,8 @@ rm -v %{buildroot}%{_mandir}/man6/quake*.6
 desktop-file-validate %{buildroot}%{_datadir}/applications/doom2-masterlevels.desktop
 
 %files
-%doc doc/adding_a_game.mdwn
-%license COPYING
+%doc %{name}-%{version}/doc/adding_a_game.mdwn
+%license %{name}-%{version}/COPYING
 %{_mandir}/man6/game-data-packager.*
 %{_mandir}/fr/man6/game-data-packager.*
 %dir %{_sysconfdir}/game-data-packager/
@@ -129,13 +133,17 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/doom2-masterlevels.de
 %{_datadir}/game-data-packager/
 
 %files -n doom2-masterlevels
-%license COPYING
+%license %{name}-%{version}/COPYING
 %{_mandir}/man6/doom2-masterlevels.*
 %{_bindir}/doom2-masterlevels
 %{_datadir}/applications/doom2-masterlevels.desktop
 %{_datadir}/pixmaps/doom2-masterlevels.png
 
 %changelog
+* Wed Mar 16 2022 Alexandre Detiste <alexandre.detiste@gmail.com> - 69-1
+- New upstream release
+- Switch to Meson build system
+
 * Fri Oct 08 2021 Alexandre Detiste <alexandre.detiste@gmail.com> - 68-1
 - New upstream release
 
