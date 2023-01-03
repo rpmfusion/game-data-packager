@@ -11,9 +11,9 @@
 
 %global _vpath_srcdir %{name}-%{version}/
 
-#define gitdate 20160112
+%define gitdate 20230104
 # git log --oneline -1
-%define gitversion 50f64b6
+%define gitversion a6352918
 
 %if 0%{?gitdate}
 %define gver .git%{gitdate}%{gitversion}
@@ -26,7 +26,7 @@ Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
 URL:           https://wiki.debian.org/Games/GameDataPackager
 %if 0%{?gitdate}
-# git archive --prefix=game-data-packager-44/ --format tar.gz master > ../rpmbuild/SOURCES/game-data-packager-`date +%Y%m%d`.tar.gz
+# git archive --prefix=game-data-packager-69/ --format tar.gz master > ../rpmbuild/SOURCES/game-data-packager-`date +%Y%m%d`.tar.gz
 Source:        game-data-packager-%{gitdate}.tar.gz
 %else
 Source:        http://http.debian.net/debian/pool/contrib/g/game-data-packager/game-data-packager_%{version}.tar.xz
@@ -39,13 +39,13 @@ BuildRequires: desktop-file-utils
 BuildRequires: ImageMagick
 BuildRequires: inkscape
 BuildRequires: python3
-BuildRequires: python3-PyYAML
+BuildRequires: python3-pyyaml
 BuildRequires: python3-pyflakes
 #BuildRequires: xcftools
 BuildRequires: xmlstarlet
 BuildRequires: zip
 
-Requires: python3-PyYAML
+Requires: python3-pyyaml
 # download
 Recommends: lgogdownloader
 Suggests: steam
@@ -76,6 +76,7 @@ data which cannot be distributed (such as commercial game data).
 Summary: "Master Levels for Doom II" launcher
 Requires: python3-gobject-base
 Requires: gobject-introspection
+Requires: gtk4
 Provides: game-data-packager-runtime = %{version}
 
 %description -n doom2-masterlevels
@@ -118,7 +119,7 @@ rm -rv %{buildroot}%{_datadir}/icons
 rm -v %{buildroot}%{_mandir}/man6/etqw*.6
 rm -v %{buildroot}%{_mandir}/man6/quake*.6
 
-desktop-file-validate %{buildroot}%{_datadir}/applications/doom2-masterlevels.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 %files
 %doc %{name}-%{version}/doc/adding_a_game.mdwn
@@ -136,10 +137,13 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/doom2-masterlevels.de
 %license %{name}-%{version}/COPYING
 %{_mandir}/man6/doom2-masterlevels.*
 %{_bindir}/doom2-masterlevels
-%{_datadir}/applications/doom2-masterlevels.desktop
+%{_datadir}/applications/net.debian.game_data_packager.doom2_masterlevels.desktop
 %{_datadir}/pixmaps/doom2-masterlevels.png
 
 %changelog
+* Wed Jan 04 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 69-2.git20230104a6352918
+- Git Snapshot
+
 * Sun Aug 07 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 69-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
