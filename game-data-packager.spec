@@ -257,8 +257,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 * Sun Jan 24 2016 Alexandre Detiste <alexandre.detiste@gmail.com> - 44-1
 - First cross-distribution release
 - Add Cacodemon icon to doom2-masterlevels subpackage
-- The (optional) licenses of generated .rpm goes now correctly to %{_datadir}/licenses
-  instead of %{_datadir}/doc
+- The (optional) licenses of generated .rpm goes now correctly to _datadir/licenses
+  instead of _datadir/doc
 - AppArmor support temporary disabled until figured out
 
 * Thu Dec 31 2015 Alexandre Detiste <alexandre.detiste@gmail.com> - 44-0.2.git2015123150f64b6
