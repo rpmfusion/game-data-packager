@@ -105,6 +105,9 @@ find %{buildroot}%{_datadir}/game-data-packager/game_data_packager -name '*.py' 
 python3 -m compileall %{buildroot}%{_datadir}/game-data-packager/game_data_packager/version.py
 find %{buildroot}%{_sysconfdir}/game-data-packager -empty -exec sh -c "echo '# we need more mirrors' > {}" \;
 
+# throw away Debian-specific scriptlet
+rm -v %{buildroot}%{_datadir}/game-data-packager/doom-common.preinst.in
+
 # throw away src:quake stuff for now
 rm -rvf %{buildroot}%{_sysconfdir}/apparmor.d
 rm -v %{buildroot}%{_bindir}/etqw*
