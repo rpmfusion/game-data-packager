@@ -100,7 +100,7 @@ echo disabled
 
 %install
 %meson_install
-find %{buildroot}%{_datadir}/game-data-packager/game_data_packager -name '*.py' -exec chmod 755 {} \;
+find %{buildroot}%{_datadir}/game-data-packager/game_data_packager -name '*.py' ! -empty -exec chmod 755 {} \;
 #E: python-bytecode-inconsistent-mtime
 python3 -m compileall %{buildroot}%{_datadir}/game-data-packager/game_data_packager/version.py
 find %{buildroot}%{_sysconfdir}/game-data-packager -empty -exec sh -c "echo '# we need more mirrors' > {}" \;
