@@ -31,6 +31,7 @@ Source:        game-data-packager-%{gitdate}.tar.gz
 %else
 Source:        http://http.debian.net/debian/pool/contrib/g/game-data-packager/game-data-packager_%{version}.tar.xz
 %endif
+Source1:       game-data-packager.rpmlintrc
 
 BuildArch:     noarch
 

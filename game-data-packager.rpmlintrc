@@ -1,2 +1,2 @@
 # this is done on purpose
-addFilter(r" W: files-duplicate /usr/share/game-data-packager/game_data_packager/version.py /usr/share/game-data-packager/game_data_packager/gdp_launcher_version.py")
+addFilter(r"files-duplicate /usr/share/game-data-packager/game_data_packager/version.py /usr/share/game-data-packager/game_data_packager/gdp_launcher_version.py")
