@@ -4,7 +4,8 @@
 # - add changelog entry
 # spectool -g game-data-packager.spec
 # rfpkg new-sources game-data-packager_${version}.tar.xz
-# rpmbuild -ba game-data-packager.spec
+# rfpkg local
+# rfpkg lint
 # rfpkg commit
 # rfpkg push
 # rfpkg build
