@@ -12,7 +12,7 @@
 
 %global _vpath_srcdir %{name}-%{version}/
 
-%define gitdate 20230104
+#define gitdate 20230104
 # git log --oneline -1
 %define gitversion a6352918
 
@@ -21,8 +21,8 @@
 %endif
 
 Name:          game-data-packager
-Version:       69
-Release:       2%{?gver}%{?dist}
+Version:       70
+Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
 URL:           https://wiki.debian.org/Games/GameDataPackager
@@ -65,6 +65,8 @@ Suggests: unar
 Suggests: unrar
 Suggests: unshield
 Suggests: unzip
+# cross-build for RaspBian
+Suggests: dpkg
 
 %global __python %{__python3}
 
@@ -146,6 +148,10 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/doom2-masterlevels.png
 
 %changelog
+* Thu Jan 12 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 70-1
+- New upstream release
+- Switch GUI to Gtk4
+
 * Wed Jan 04 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 69-2.git20230104a6352918
 - Git Snapshot
 
