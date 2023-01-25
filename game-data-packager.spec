@@ -21,7 +21,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       70
+Version:       71
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -148,6 +148,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/doom2-masterlevels.png
 
 %changelog
+* Wed Jan 25 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 71-1
+- New upstream release
+
 * Thu Jan 12 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 70-1
 - New upstream release
 - Switch GUI to Gtk4
