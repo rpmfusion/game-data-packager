@@ -21,7 +21,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       71
+Version:       72
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -65,8 +65,10 @@ Suggests: unar
 Suggests: unrar
 Suggests: unshield
 Suggests: unzip
+Suggests: xorriso
 # cross-build for RaspBian
 Suggests: dpkg
+Suggests: python3-debian
 
 %global __python %{__python3}
 
@@ -148,6 +150,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/doom2-masterlevels.png
 
 %changelog
+* Fri Feb 10 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 72-1
+- New upstream release
+
 * Wed Jan 25 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 71-1
 - New upstream release
 
