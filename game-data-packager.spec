@@ -21,7 +21,7 @@
 %endif
 
 Name:          game-data-packager
-Version:       75
+Version:       76
 Release:       1%{?gver}%{?dist}
 Summary:       Installer for game data files
 License:       GPLv2 and GPLv2+
@@ -42,8 +42,6 @@ BuildRequires: ImageMagick
 BuildRequires: inkscape
 BuildRequires: python3
 BuildRequires: python3-pyyaml
-BuildRequires: python3-pyflakes
-#BuildRequires: xcftools
 BuildRequires: xmlstarlet
 BuildRequires: zip
 
@@ -150,6 +148,9 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_datadir}/pixmaps/doom2-masterlevels.png
 
 %changelog
+* Wed Sep 13 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 76-1
+- New upstream release
+
 * Wed Jul 26 2023 Alexandre Detiste <alexandre.detiste@gmail.com> - 75-1
 - New upstream release
 
